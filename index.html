@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Traffic Light</title>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-gray-900 to-black">
+
+    <!-- Card -->
+    <div class="w-[430px] rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-8 text-center">
+
+        <!-- Icon -->
+        <div class="w-[90px] h-[90px] mx-auto mb-6 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-green-500 flex items-center justify-center text-[42px] shadow-xl">
+            🚦
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-white text-[32px] font-bold">
+            Traffic Light
+        </h1>
+
+        <p class="text-gray-300 mt-2 mb-8">
+            Click the button to start the traffic light sequence.
+        </p>
+
+        <!-- Traffic Signal -->
+        <div class="w-[130px] mx-auto bg-black rounded-[28px] p-5 border-2 border-gray-700 shadow-inner space-y-5">
+
+            <div id="red2"
+                class="w-20 h-20 bg-gray-700 rounded-full mx-auto duration-500 shadow-inner">
+            </div>
+
+            <div id="yellow2"
+                class="w-20 h-20 bg-gray-700 rounded-full mx-auto duration-500 shadow-inner">
+            </div>
+
+            <div id="green2"
+                class="w-20 h-20 bg-gray-700 rounded-full mx-auto duration-500 shadow-inner">
+            </div>
+
+        </div>
+
+        <!-- Button -->
+        <button
+            onclick="startTraffic()"
+            class="mt-8 w-full py-4 rounded-[18px] bg-gradient-to-r from-red-500 via-yellow-400 to-green-500 text-black font-bold text-[18px] shadow-lg hover:scale-105 hover:shadow-red-500/40 duration-300 active:scale-95">
+
+            Start Traffic Light
+
+        </button>
+
+    </div>
+
+<script>
+let current = 0;
+let timer;
+
+function startTraffic() {
+
+    if (timer) return;
+
+    const lights = [
+        document.getElementById("red2"),
+        document.getElementById("yellow2"),
+        document.getElementById("green2")
+    ];
+
+    const colors = [
+        "bg-red-500",
+        "bg-yellow-400",
+        "bg-green-500"
+    ];
+
+    timer = setInterval(() => {
+
+        lights.forEach(light => {
+            light.className =
+                "w-20 h-20 bg-gray-700 rounded-full mx-auto duration-500 shadow-inner";
+        });
+
+        lights[current].classList.remove("bg-gray-700");
+        lights[current].classList.add(colors[current]);
+
+        current++;
+
+        if (current > 2) {
+            current = 0;
+        }
+
+    }, 2000);
+
+}
+</script>
+
+</body>
+</html>
